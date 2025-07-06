@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Crush | 3D Book</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&family=Playfair+Display:wght@700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            font-family: 'Cormorant Garamond', serif;
+            color: #e6e6e6;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            transition: background 1s ease;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%230f3460' fill-opacity='0.3' fill-rule='evenodd'/%3E%3C/svg%3E");
+            opacity: 0.6;
+            z-index: -1;
+        }
+
+        /* Login Page Styles */
+        .login-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            background: rgba(10, 15, 30, 0.95);
+            position: relative;
+            z-index: 10;
+            transition: opacity 0.8s ease;
+        }
+
+        .login-box {
+            background: rgba(26, 42, 77, 0.8);
+            border: 1px solid #4e89e8;
+            border-radius: 15px;
+            padding: 40px;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s forwards;
+            backdrop-filter: blur(10px);
+        }
+
+        @keyframes fadeInUp {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .login-box::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #4e89e8, #6a98f0, #4e89e8);
+        }
+
+        .login-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #e6e6ff;
+            position: relative;
+            text-shadow: 0 0 15px rgba(78, 137, 232, 0.5);
+        }
+
+        .login-title::after {
+            content: "";
+            display: block;
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #4e89e8, transparent);
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .form-group {
+            position: relative;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+            color: #b8c7ff;
+            font-weight: 600;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 14px 18px;
+            border: 1px solid #4e89e8;
+            border-radius: 8px;
+            background: rgba(18, 25, 50, 0.7);
+            font-size: 1.1rem;
+            color: #e6e6ff;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #6a98f0;
+            box-shadow: 0 0 0 3px rgba(106, 152, 240, 0.3);
+        }
+
+        .login-btn {
+            background: linear-gradient(to right, #4e89e8, #6a98f0);
+            color: white;
+            border: none;
+            padding: 16px;
+            font-size: 1.2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            margin-top: 15px;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(78, 137, 232, 0.4);
+        }
+
+        .login-btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: 0.6s;
+        }
+
+        .login-btn:hover::before {
+            left: 100%;
+        }
+
+        .login-btn:hover {
+            background: linear-gradient(to right, #3d7ae0, #5a8aec);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(78, 137, 232, 0.6);
+        }
+
+        /* Book Container Styles */
+        .book-container {
+            display: none;
+            flex-direction: column;
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 20;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: #e6e6ff;
+            letter-spacing: 1px;
+            text-shadow: 0 0 10px rgba(78, 137, 232, 0.5);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #b8c7ff;
+            font-size: 1.3rem;
+            font-weight: 600;
+            padding: 8px 15px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: #ffffff;
+            background: rgba(78, 137, 232, 0.2);
+        }
+
+        .nav-link::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #6a98f0;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link.active {
+            color: #ffffff;
+            background: rgba(78, 137, 232, 0.3);
+        }
+
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .page-section {
+            display: none;
+            flex: 1;
+            padding: 30px 0;
+            animation: fadeIn 0.8s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .page-section.active {
+            display: block;
+        }
+
+        .page-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.2rem;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #e6e6ff;
+            text-shadow: 0 0 15px rgba(78, 137, 232, 0.4);
+        }
+
+        .page-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Home Page */
+        .book-scene-container {
+            position: relative;
+            width: 100%;
+            height: 600px;
+            max-width: 900px;
+            margin: 40px auto;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+            background: rgba(18, 25, 50, 0.6);
+            border: 2px solid rgba(106, 152, 240, 0.3);
+        }
+
+        #bookCanvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .book-controls {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .book-btn {
+            background: linear-gradient(to right, #4e89e8, #6a98f0);
+            color: white;
+            border: none;
+            padding: 16px 45px;
+            font-size: 1.3rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            letter-spacing: 1px;
+            box-shadow: 0 5px 20px rgba(78, 137, 232, 0.4);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .book-btn:hover {
+            background: linear-gradient(to right, #3d7ae0, #5a8aec);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(78, 137, 232, 0.6);
+        }
+
+        .book-btn.secondary {
+            background: transparent;
+            color: #b8c7ff;
+            border: 2px solid #4e89e8;
+        }
+
+        .book-btn.secondary:hover {
+            background: rgba(78, 137, 232, 0.2);
+            color: #ffffff;
+        }
+
+        /* About Page */
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 35px;
+            margin-top: 40px;
+        }
+
+        .about-card {
+            background: rgba(26, 42, 77, 0.6);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(106, 152, 240, 0.2);
+        }
+
+        .about-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 15px 40px rgba(78, 137, 232, 0.4);
+        }
+
+        .about-image {
+            height: 280px;
+            background: linear-gradient(135deg, #3a5ca0, #4e89e8);
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .about-image::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0.3));
+        }
+
+        .about-text {
+            padding: 25px;
+            font-size: 1.3rem;
+            line-height: 1.7;
+            color: #e6e6ff;
+        }
+
+        .about-quote {
+            margin-top: 50px;
+            padding: 40px;
+            background: rgba(26, 42, 77, 0.7);
+            border-radius: 15px;
+            font-family: 'Dancing Script', cursive;
+            font-size: 2rem;
+            text-align: center;
+            color: #e6e6ff;
+            position: relative;
+            border: 1px solid rgba(106, 152, 240, 0.3);
+            backdrop-filter: blur(5px);
+        }
+
+        .about-quote::before, .about-quote::after {
+            content: """;
+            font-size: 5rem;
+            position: absolute;
+            color: rgba(106, 152, 240, 0.3);
+        }
+
+        .about-quote::before {
+            top: 10px;
+            left: 20px;
+        }
+
+        .about-quote::after {
+            bottom: 10px;
+            right: 20px;
+            transform: rotate(180deg);
+        }
+
+        /* Surprise Page */
+        .surprise-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(26, 42, 77, 0.7);
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(106, 152, 240, 0.3);
+            backdrop-filter: blur(5px);
+        }
+
+        .surprise-container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(90deg, #4e89e8, #6a98f0, #4e89e8);
+        }
+
+        .surprise-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 40px;
+            color: #e6e6ff;
+            text-shadow: 0 0 10px rgba(106, 152, 240, 0.5);
+        }
+
+        .surprise-text {
+            font-size: 1.5rem;
+            line-height: 1.9;
+            color: #b8c7ff;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .message-form {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .form-row {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #b8c7ff;
+            font-size: 1.3rem;
+        }
+
+        .form-textarea {
+            width: 100%;
+            padding: 20px;
+            border: 1px solid #4e89e8;
+            border-radius: 12px;
+            background: rgba(18, 25, 50, 0.7);
+            font-size: 1.2rem;
+            color: #e6e6ff;
+            min-height: 180px;
+            resize: vertical;
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .form-textarea:focus {
+            outline: none;
+            border-color: #6a98f0;
+            box-shadow: 0 0 0 3px rgba(106, 152, 240, 0.3);
+        }
+
+        /* Memories Page */
+        .memories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .memory-item {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            height: 350px;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            border: 1px solid rgba(106, 152, 240, 0.2);
+        }
+
+        .memory-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(78, 137, 232, 0.4);
+        }
+
+        .memory-image {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #3a5ca0, #4e89e8);
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.6s ease;
+        }
+
+        .memory-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 20px;
+            transform: translateY(100%);
+            transition: transform 0.4s ease;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+
+        .memory-item:hover .memory-caption {
+            transform: translateY(0);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: #b8c7ff;
+            font-size: 1.1rem;
+            margin-top: 50px;
+            position: relative;
+            z-index: 20;
+        }
+
+        /* Email Success Message */
+        .email-success {
+            background: rgba(40, 167, 69, 0.2);
+            color: #d4edda;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 30px;
+            display: none;
+            border: 1px solid rgba(40, 167, 69, 0.4);
+            text-align: center;
+            font-size: 1.2rem;
+        }
+
+        /* Loading spinner */
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            border-top: 4px solid #4e89e8;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 30px auto;
+            display: none;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Floating elements */
+        .floating-element {
+            position: absolute;
+            opacity: 0.7;
+            z-index: 1;
+            animation: float 15s infinite ease-in-out;
+        }
+
+        .floating-element.book {
+            width: 80px;
+            height: 100px;
+            background: rgba(78, 137, 232, 0.2);
+            border-radius: 5px;
+            box-shadow: 0 0 20px rgba(78, 137, 232, 0.3);
+        }
+
+        .floating-element.heart {
+            width: 30px;
+            height: 30px;
+            background: #ff6b6b;
+            transform: rotate(45deg);
+            box-shadow: 0 0 15px rgba(255, 107, 107, 0.5);
+        }
+
+        .floating-element.heart::before, 
+        .floating-element.heart::after {
+            content: "";
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: #ff6b6b;
+            border-radius: 50%;
+        }
+
+        .floating-element.heart::before {
+            top: -15px;
+            left: 0;
+        }
+
+        .floating-element.heart::after {
+            top: 0;
+            left: -15px;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(5deg); }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1024px) {
+            .book-scene-container {
+                height: 500px;
+            }
+            
+            .about-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .login-box {
+                padding: 30px 20px;
+            }
+            
+            .login-title {
+                font-size: 2.3rem;
+            }
+            
+            .page-title {
+                font-size: 2.6rem;
+            }
+            
+            .book-scene-container {
+                height: 400px;
+            }
+            
+            .header {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .nav-menu {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+            
+            .book-controls {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+            
+            .book-btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .login-title {
+                font-size: 2rem;
+            }
+            
+            .page-title {
+                font-size: 2.2rem;
+            }
+            
+            .book-scene-container {
+                height: 300px;
+            }
+            
+            .surprise-container {
+                padding: 30px 20px;
+            }
+            
+            .about-quote {
+                padding: 30px 20px;
+                font-size: 1.7rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating elements -->
+    <div class="floating-element book" style="top: 5%; left: 3%; animation-delay: 0s;"></div>
+    <div class="floating-element heart" style="top: 15%; right: 5%; animation-delay: 2s;"></div>
+    <div class="floating-element book" style="top: 40%; left: 10%; animation-delay: 4s;"></div>
+    <div class="floating-element heart" style="bottom: 20%; right: 8%; animation-delay: 1s;"></div>
+    <div class="floating-element book" style="bottom: 10%; left: 7%; animation-delay: 3s;"></div>
+
+    <!-- Login Page -->
+    <div class="login-container" id="loginPage">
+        <div class="login-box">
+            <h1 class="login-title">For You Beautiful</h1>
+            <form class="login-form" id="loginForm">
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input type="password" class="form-input" id="password" required placeholder="Enter our special code">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Remember Me</label>
+                    <input type="checkbox" id="remember" checked>
+                </div>
+                <button type="submit" class="login-btn">Open the Book</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Book Page -->
+    <div class="book-container" id="bookPage">
+        <div class="header">
+            <div class="logo">Hey Beautiful</div>
+            <div class="nav-menu">
+                <a href="#" class="nav-link active" data-page="home">Home</a>
+                <a href="#" class="nav-link" data-page="about">About</a>
+                <a href="#" class="nav-link" data-page="surprise">Surprise</a>
+                <a href="#" class="nav-link" data-page="memories">Memories</a>
+            </div>
+        </div>
+        
+        <!-- Home Page -->
+        <section id="home-page" class="page-section active">
+            <h1 class="page-title">Our Story That Never Began</h1>
+            <div class="page-content">
+                <div class="book-scene-container">
+                    <canvas id="bookCanvas"></canvas>
+                </div>
+                
+                <div class="book-controls">
+                    <button class="book-btn" id="turnPageBtn">
+                        <i class="fas fa-book-open"></i> Turn the Page
+                    </button>
+                    <button class="book-btn secondary" id="randomPageBtn">
+                        <i class="fas fa-random"></i> Views & Memories (if)
+                    </button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- About Page -->
+        <section id="about-page" class="page-section">
+            <h1 class="page-title">Hey Asra!</h1>
+            <div class="page-content">
+                <div class="about-grid">
+                    <div class="about-card">
+                        <div class="about-image"></div>
+                        <div class="about-text">
+                            <h3 style="color: #6a98f0; margin-bottom: 15px;">When I First Saw You</h3>
+                            <p>I still remember the first time I saw you—in that quiet corner of our Biotechnology class. Trust me you felt kind of arrogant to me, you gave a brutal side eye, you were quite like your books, but I developed feelings for you the moment I saw you.</p>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="about-card">
+                        <div class="about-image"></div>
+                        <div class="about-text">
+                            <h3 style="color: #6a98f0; margin-bottom: 15px;">A Confession</h3>
+                            <p>Honestly, I don't like reading novels, books, yes I do read some political/ non fictional/ CS books, but I never read novels (maybe I read some in my school) I am doing all this because doing for you makes me happy. I am not doing it for you but for me, it makes me happy. And I don't watch movies.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="about-card">
+                        <div class="about-image"></div>
+                        <div class="about-text">
+                            <h3 style="color: #6a98f0; margin-bottom: 15px;">When I Saw Your Face</h3>
+                            <p>The first time I actually saw your face wasn't in class—it was during exam season. I didn't even ask someone; I just typed your roll number when the forms came out & I saw that cute looking picture of yours.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="about-card">
+                        <div class="about-image"></div>
+                        <div class="about-text">
+                            <h3 style="color: #6a98f0; margin-bottom: 15px;">My Views</h3>
+                            <p>Whether your hair's open or tied up, you look pretty. You wear black like it was made for you. And when you're in traditionals… that's a whole different kind of pretty.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="about-quote">
+                    Made a small book like website<br>
+                    Because a book can be opened quietly.<br>
+                    It doesn't ask for attention.<br>
+                    I know we can never meet.<br> 
+                    Maybe you'll never even know who I am.<br> 
+                    But that doesn't stop me from doing everything for you...
+                    Trust me I am a very social person, an extrovert but......
+                </div>
+                <div class="about-quote">
+                    I don't know why I would never confess<br>
+                    Even though I am an extrovert<br>
+                    Even though I can but......<br>
+                    Maybe because I have only seen you from a distance,<br> 
+                    the kind where you don't react out.....<br> 
+                    you just watch, quitely, hoping the moment never ends
+                    
+                </div>
+            </div>
+        </section>
+        
+        <!-- Surprise Page -->
+        <section id="surprise-page" class="page-section">
+            <h1 class="page-title">Well, Let the Surprise be a surprise</h1>
+            <div class="page-content">
+                <div class="surprise-container">
+                    <h2 class="surprise-title">A Special Message</h2>
+                    <p class="surprise-text">
+                        Some people are'nt meant to meet.
+                        Not because they're strangers,
+                        but because one of them is too scared to be seen, Haha...
+                        and the other one never realized they were being loved this much.
+                        Maybe you deserve more, I wish you do, But .........    
+                    </p>
+                    
+                    <!-- <form id="messageForm" class="message-form" action="https://formspree.io/f/mjvnnqzo" method="POST">
+                        <div class="form-row">
+                            <label class="form-label">Your Message to Me:</label>
+                            <textarea class="form-textarea" id="message" name="message" placeholder="Write your heartfelt message here..." required></textarea>
+                        </div>
+                        <button type="submit" class="book-btn">
+                            <i class="fas fa-paper-plane"></i> Send Your Message
+                        </button>
+                    </form> -->
+                    <div class="spinner" id="spinner"></div>
+                    <div class="email-success" id="emailSuccess">
+                        <i class="fas fa-check-circle"></i> Your message has been sent successfully!
+                    </div>
+                </div>
+            </div>
+        </section>        
+        <!-- Memories Page -->
+        <section id="memories-page" class="page-section">
+            <h1 class="page-title">Our Digital Memories</h1>
+            <div class="page-content">
+                <div class="memories-grid">
+                    <div class="memory-item">
+                        <div class="memory-image"></div>
+                        <div class="memory-caption">Will You?</div>
+                    </div>
+                    <div class="memory-item">
+                        <div class="memory-image"></div>
+                        <div class="memory-caption">Our First Digital Memory (IF)</div>
+                    </div>
+                    <div class="memory-item">
+                        <div class="memory-image"></div>
+                        <div class="memory-caption">Special Moments (IF)</div>
+                    </div>
+                    <div class="memory-item">
+                        <div class="memory-image"></div>
+                        <div class="memory-caption">Shared Dreams(IF)</div>
+                    </div>
+                    <div class="memory-item">
+                        <div class="memory-image"></div>
+                        <div class="memory-caption">Quiet Thoughts(IF)</div>
+                    </div>
+                    <div class="memory-item">
+                        <div class="memory-image"></div>
+                        <div class="memory-caption">Future Hopes(IF)</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <div class="footer">
+            <p>Created with love • For my special someone</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Ensure we start at login page
+            localStorage.removeItem('isLoggedIn');
+            
+            // Login functionality
+            const loginForm = document.getElementById('loginForm');
+            const loginPage = document.getElementById('loginPage');
+            const bookPage = document.getElementById('bookPage');
+            const rememberCheckbox = document.getElementById('remember');
+            const pageSections = document.querySelectorAll('.page-section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const turnPageBtn = document.getElementById('turnPageBtn');
+            const randomPageBtn = document.getElementById('randomPageBtn');
+            const messageForm = document.getElementById('messageForm');
+            const spinner = document.getElementById('spinner');
+            const emailSuccess = document.getElementById('emailSuccess');
+            
+            // Page turn sound
+            const pageSound = new Howl({
+                src: ['https://assets.mixkit.co/sfx/preview/mixkit-book-page-turn-1181.mp3'],
+                volume: 0.6
+            });
+            
+            // Handle login form submission
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const password = document.getElementById('password').value;
+                
+                // Simple password validation
+                if(password === 'heyBeautiful') {
+                    if(rememberCheckbox.checked) {
+                        localStorage.setItem('isLoggedIn', 'true');
+                    }
+                    
+                    // Animate login page out
+                    gsap.to(loginPage, {
+                        opacity: 0,
+                        duration: 0.8,
+                        onComplete: () => {
+                            loginPage.style.display = 'none';
+                            bookPage.style.display = 'flex';
+                            initBookScene();
+                        }
+                    });
+                } else {
+                    alert('Incorrect password. Please try again.');
+                }
+            });
+            
+            // Navigation
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetPage = this.getAttribute('data-page');
+                    
+                    // Play page turn sound
+                    pageSound.play();
+                    
+                    // Update active nav link
+                    navLinks.forEach(link => link.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Show target page
+                    pageSections.forEach(section => {
+                        section.classList.remove('active');
+                        gsap.fromTo(section, 
+                            { opacity: 0, y: 20 },
+                            { opacity: 1, y: 0, duration: 0.8 }
+                        );
+                    });
+                    document.getElementById(`${targetPage}-page`).classList.add('active');
+                });
+            });
+            
+            // Turn page button
+            turnPageBtn.addEventListener('click', function() {
+                pageSound.play();
+                const currentPage = document.querySelector('.page-section.active');
+                let nextPage;
+                
+                if(currentPage.id === 'home-page') nextPage = document.getElementById('about-page');
+                else if(currentPage.id === 'about-page') nextPage = document.getElementById('surprise-page');
+                else if(currentPage.id === 'surprise-page') nextPage = document.getElementById('memories-page');
+                else nextPage = document.getElementById('home-page');
+                
+                // Update nav
+                navLinks.forEach(link => link.classList.remove('active'));
+                document.querySelector(`.nav-link[data-page="${nextPage.id.split('-')[0]}"]`).classList.add('active');
+                
+                currentPage.classList.remove('active');
+                nextPage.classList.add('active');
+            });
+            
+            // Random page button
+            randomPageBtn.addEventListener('click', function() {
+                pageSound.play();
+                const pages = ['home', 'about', 'surprise', 'memories'];
+                const randomPage = pages[Math.floor(Math.random() * pages.length)];
+                
+                // Update nav
+                navLinks.forEach(link => link.classList.remove('active'));
+                document.querySelector(`.nav-link[data-page="${randomPage}"]`).classList.add('active');
+                
+                // Show page
+                pageSections.forEach(section => {
+                    section.classList.remove('active');
+                });
+                document.getElementById(`${randomPage}-page`).classList.add('active');
+            });
+            
+            // Message form - Email functionality
+            messageForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const message = document.getElementById('message').value;
+                
+                if(message.trim() === '') {
+                    alert('Please write a message before sending.');
+                    return;
+                }
+                
+                // Show spinner
+                spinner.style.display = 'block';
+                emailSuccess.style.display = 'none';
+                
+                // Submit form to Formspree
+                fetch('https://formspree.io/f/mjvnnqzo', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        message: message,
+                        _replyto: 'anonymouslovericsc@gmail.com'
+                    })
+                })
+                .then(response => {
+                    if (response.ok) {
+                        // Hide spinner
+                        spinner.style.display = 'none';
+                        emailSuccess.style.display = 'block';
+                        
+                        // Reset form
+                        document.getElementById('message').value = '';
+                        
+                        // Hide success message after 5 seconds
+                        setTimeout(() => {
+                            emailSuccess.style.display = 'none';
+                        }, 5000);
+                    } else {
+                        throw new Error('Failed to send message');
+                    }
+                })
+                .catch(error => {
+                    spinner.style.display = 'none';
+                    alert('Error sending message. Please try again later.');
+                });
+            });
+            
+            // Initialize Three.js scene for book and glasses
+            function initBookScene() {
+                const canvas = document.getElementById('bookCanvas');
+                const scene = new THREE.Scene();
+                const camera = new THREE.PerspectiveCamera(60, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
+                const renderer = new THREE.WebGLRenderer({ 
+                    canvas, 
+                    antialias: true,
+                    alpha: true
+                });
+                
+                renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+                renderer.setClearColor(0x000000, 0);
+                renderer.setPixelRatio(window.devicePixelRatio);
+                
+                // Add lighting
+                const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+                scene.add(ambientLight);
+                
+                const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+                directionalLight.position.set(5, 5, 7);
+                scene.add(directionalLight);
+                
+                const backLight = new THREE.DirectionalLight(0xffffff, 0.4);
+                backLight.position.set(-5, 5, -5);
+                scene.add(backLight);
+                
+                // Create book cover
+                const bookCoverGeometry = new THREE.BoxGeometry(3, 4, 0.2);
+                const bookCoverMaterial = new THREE.MeshPhongMaterial({ 
+                    color: 0x4e89e8,
+                    shininess: 60,
+                    specular: 0xffffff
+                });
+                const bookCover = new THREE.Mesh(bookCoverGeometry, bookCoverMaterial);
+                bookCover.position.z = -5;
+                bookCover.rotation.y = -0.3;
+                scene.add(bookCover);
+                
+                // Create book pages
+                const pages = [];
+                for (let i = 0; i < 20; i++) {
+                    const pageGeometry = new THREE.BoxGeometry(2.95, 3.95, 0.05);
+                    const pageMaterial = new THREE.MeshPhongMaterial({ 
+                        color: 0xf8f8f8,
+                        shininess: 30
+                    });
+                    const page = new THREE.Mesh(pageGeometry, pageMaterial);
+                    page.position.z = -5;
+                    page.position.x = i * 0.01;
+                    page.position.y = -0.01;
+                    page.rotation.y = -0.3;
+                    scene.add(page);
+                    pages.push(page);
+                }
+                
+                // Create realistic glasses
+                const createGlasses = () => {
+                    const glasses = new THREE.Group();
+                    
+                    // Frame
+                    const frameGeometry = new THREE.TorusGeometry(0.6, 0.03, 16, 32);
+                    const frameMaterial = new THREE.MeshPhongMaterial({ 
+                        color: 0x333333,
+                        shininess: 100
+                    });
+                    
+                    const leftFrame = new THREE.Mesh(frameGeometry, frameMaterial);
+                    leftFrame.position.x = -0.7;
+                    
+                    const rightFrame = new THREE.Mesh(frameGeometry, frameMaterial);
+                    rightFrame.position.x = 0.7;
+                    
+                    // Bridge
+                    const bridgeGeometry = new THREE.BoxGeometry(0.4, 0.03, 0.03);
+                    const bridge = new THREE.Mesh(bridgeGeometry, frameMaterial);
+                    bridge.position.y = -0.02;
+                    
+                    // Arms
+                    const armGeometry = new THREE.BoxGeometry(1.2, 0.03, 0.03);
+                    const leftArm = new THREE.Mesh(armGeometry, frameMaterial);
+                    leftArm.position.set(-0.7, 0, -0.6);
+                    leftArm.rotation.z = Math.PI / 6;
+                    
+                    const rightArm = new THREE.Mesh(armGeometry, frameMaterial);
+                    rightArm.position.set(0.7, 0, -0.6);
+                    rightArm.rotation.z = -Math.PI / 6;
+                    
+                    // Lenses
+                    const lensGeometry = new THREE.CircleGeometry(0.5, 32);
+                    const lensMaterial = new THREE.MeshPhongMaterial({
+                        color: 0x3a506b,
+                        transparent: true,
+                        opacity: 0.3,
+                        shininess: 100,
+                        specular: 0xffffff
+                    });
+                    
+                    const leftLens = new THREE.Mesh(lensGeometry, lensMaterial);
+                    leftLens.position.set(-0.7, 0, 0);
+                    leftLens.rotation.y = Math.PI;
+                    
+                    const rightLens = new THREE.Mesh(lensGeometry, lensMaterial);
+                    rightLens.position.set(0.7, 0, 0);
+                    
+                    glasses.add(leftFrame);
+                    glasses.add(rightFrame);
+                    glasses.add(bridge);
+                    glasses.add(leftArm);
+                    glasses.add(rightArm);
+                    glasses.add(leftLens);
+                    glasses.add(rightLens);
+                    
+                    return glasses;
+                };
+                
+                const glasses = createGlasses();
+                glasses.position.set(0, 0.5, -4);
+                glasses.rotation.x = 0.1;
+                scene.add(glasses);
+                
+                // Add floating particles
+                const particles = [];
+                const particleGeometry = new THREE.BufferGeometry();
+                const particleMaterial = new THREE.PointsMaterial({
+                    color: 0x6a98f0,
+                    size: 0.05,
+                    transparent: true,
+                    opacity: 0.7
+                });
+                
+                for (let i = 0; i < 300; i++) {
+                    const x = (Math.random() - 0.5) * 10;
+                    const y = (Math.random() - 0.5) * 10;
+                    const z = (Math.random() - 0.5) * 10 - 5;
+                    particles.push(x, y, z);
+                }
+                
+                particleGeometry.setAttribute('position', new THREE.Float32BufferAttribute(particles, 3));
+                const particleSystem = new THREE.Points(particleGeometry, particleMaterial);
+                scene.add(particleSystem);
+                
+                // Animation loop
+                let time = 0;
+                function animate() {
+                    requestAnimationFrame(animate);
+                    time += 0.01;
+                    
+                    // Gentle rotation for book
+                    bookCover.rotation.y = -0.3 + Math.sin(time * 0.5) * 0.05;
+                    pages.forEach(page => {
+                        page.rotation.y = -0.3 + Math.sin(time * 0.5) * 0.05;
+                    });
+                    
+                    // Glasses rotation
+                    glasses.rotation.y = time * 0.3;
+                    glasses.rotation.x = 0.1 + Math.sin(time * 0.7) * 0.03;
+                    
+                    // Particle movement
+                    const positions = particleGeometry.attributes.position.array;
+                    for (let i = 0; i < positions.length; i += 3) {
+                        positions[i + 1] += Math.sin(time + i) * 0.002;
+                    }
+                    particleGeometry.attributes.position.needsUpdate = true;
+                    
+                    renderer.render(scene, camera);
+                }
+                
+                // Handle window resize
+                function onWindowResize() {
+                    camera.aspect = canvas.clientWidth / canvas.clientHeight;
+                    camera.updateProjectionMatrix();
+                    renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+                }
+                
+                window.addEventListener('resize', onWindowResize);
+                animate();
+            }
+        });
+    </script>
+</body>
+</html>
