@@ -343,84 +343,25 @@
             color: #ffffff;
         }
 
-        /* About Page */
-        .about-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 35px;
-            margin-top: 40px;
-        }
-
-        .about-card {
+        /* About Page - Modified for large text */
+        .large-note-container {
             background: rgba(26, 42, 77, 0.6);
             border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(106, 152, 240, 0.2);
-        }
-
-        .about-card:hover {
-            transform: translateY(-15px);
-            box-shadow: 0 15px 40px rgba(78, 137, 232, 0.4);
-        }
-
-        .about-image {
-            height: 280px;
-            background: linear-gradient(135deg, #3a5ca0, #4e89e8);
-            background-size: cover;
-            background-position: center;
-            position: relative;
-        }
-
-        .about-image::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0.3));
-        }
-
-        .about-text {
-            padding: 25px;
-            font-size: 1.3rem;
-            line-height: 1.7;
-            color: #e6e6ff;
-        }
-
-        .about-quote {
-            margin-top: 50px;
             padding: 40px;
-            background: rgba(26, 42, 77, 0.7);
-            border-radius: 15px;
-            font-family: 'Dancing Script', cursive;
-            font-size: 2rem;
-            text-align: center;
-            color: #e6e6ff;
-            position: relative;
-            border: 1px solid rgba(106, 152, 240, 0.3);
+            margin-top: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(106, 152, 240, 0.2);
             backdrop-filter: blur(5px);
+            max-height: 70vh;
+            overflow-y: auto;
         }
 
-        .about-quote::before, .about-quote::after {
-            content: """;
-            font-size: 5rem;
-            position: absolute;
-            color: rgba(106, 152, 240, 0.3);
-        }
-
-        .about-quote::before {
-            top: 10px;
-            left: 20px;
-        }
-
-        .about-quote::after {
-            bottom: 10px;
-            right: 20px;
-            transform: rotate(180deg);
+        .large-note-content {
+            font-size: 1.4rem;
+            line-height: 1.8;
+            color: #e6e6ff;
+            min-height: 400px;
+            white-space: pre-wrap;
         }
 
         /* Surprise Page */
@@ -646,10 +587,6 @@
             .book-scene-container {
                 height: 500px;
             }
-            
-            .about-grid {
-                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            }
         }
 
         @media (max-width: 768px) {
@@ -690,6 +627,21 @@
                 width: 100%;
                 max-width: 300px;
             }
+            
+            /* Improved mobile navigation spacing */
+            .nav-link {
+                font-size: 1.1rem;
+                padding: 6px 12px;
+            }
+            
+            .large-note-container {
+                padding: 25px;
+                max-height: 60vh;
+            }
+            
+            .large-note-content {
+                font-size: 1.2rem;
+            }
         }
 
         @media (max-width: 480px) {
@@ -709,9 +661,22 @@
                 padding: 30px 20px;
             }
             
-            .about-quote {
-                padding: 30px 20px;
-                font-size: 1.7rem;
+            .large-note-container {
+                padding: 20px;
+                max-height: 50vh;
+            }
+            
+            .large-note-content {
+                font-size: 1.1rem;
+            }
+            
+            /* Adjusted for better mobile readability */
+            .nav-menu {
+                gap: 10px;
+            }
+            
+            .logo {
+                font-size: 2rem;
             }
         }
     </style>
@@ -774,65 +739,106 @@
             </div>
         </section>
         
-        <!-- About Page -->
+        <!-- About Page - Modified -->
         <section id="about-page" class="page-section">
             <h1 class="page-title">Hey Asra!</h1>
             <div class="page-content">
-                <div class="about-grid">
-                    <div class="about-card">
-                        <div class="about-image"></div>
-                        <div class="about-text">
-                            <h3 style="color: #6a98f0; margin-bottom: 15px;">When I First Saw You</h3>
-                            <p>I still remember the first time I saw you—in that quiet corner of our Biotechnology class. Trust me you felt kind of arrogant to me, you gave a brutal side eye, you were quite like your books, but I developed feelings for you the moment I saw you.</p>
-                        </div>
+                <div class="large-note-container">
+                    <div class="large-note-content">
+Hey!
+Although, I know you are never going to read it, maybe, But maybe you would read it one day. The date is Aug 8, 2025. 
+I'm sorry for whatever happened. Whatever happened shouldn’t have happened at all.
+Maybe it's because I had never come across someone like you before.
+
+Let me start from the beginning.
+1 — You can skip this, because you already know it- maybe. 
+
+You know, when I first saw you, you seemed very different/ atlesast for me.
+There were a lot of girls in our class that day (I only knew Aqsa and Iram). Some were talking, gossiping, some were on their phones, and a few were studying.
+But you were the only one completely focused, you didn’t even move your head that day, at least not that I noticed.
+
+I only caught a glimpse of you, but I still remember that side glance.
+Maybe that was the moment I got scared, like I was seeing something I wasn’t ready for.
+
+At that time, I thought maybe someday I’d talk to you.
+Days passed. Trust me, though I can’t recall the exact dates now, I wasn’t even trying to look at you. 
+I don’t know why, but… after a few weeks, I saw you again near the Zoology department. And this time, I saw you up close.
+
+That’s when I realized, you really were different, different from others, different from the people I have met.
+And maybe, I would never get the chance to talk to you, I thought- and Maybe, I was right.
+
+Months passed, and I saw you again (though I used to quietly watch you in class during our 3rd/4th/5th semester).
+And trust me, by then, I truly wanted to speak to you.
+I even tried... I asked you something, but someone else replied, IG- Simra or Anika.
+So, I just walked away.
+
+2- How I Planned to Confess My Feelings
+You know, that night I was in Pahalgam, we were three: Faizan, Adnan, and me.
+I told Faizan about you, and he suggested that I should confess.
+Maybe because he thought it would save me from regret later. 
+
+I listened to him and said, “Okay, I will.”
+But deep down, I knew I couldn’t do it—at least not face-to-face, or anything like that…
+
+After a few days—or maybe weeks—I saw your Tellonym.
+Because honestly, I used to stalk your Instagram almost three times a week.
+That’s when I made up my mind: I’d confess anonymously through Tellonym.
+That way, I could finally get it off my chest… and you’d never really know it was me.
+
+I sent you my first Tell — “Hey Whisper.”
+You replied to that one.
+But when I sent another Tell after that, you didn’t reply.
+And that’s when I thought ,  maybe you didn’t like it.......… maybe I should stop.
+
+I waited for the next 9–10 months.
+And then, I finally sent you the third Tell — the one where I actually confessed my feelings.
+Truth is, I had planned that confession almost a year in advance, maybe right after you didn’t reply to the second Tell.
+
+3- Post confession
+I’ve mentioned this several times — all I ever wanted was to confess my feelings.
+I never intended to reveal my identity… or even talk to you.
+
+But you know, when the Tells started, things went out of my hands.
+After the 5th or 6th Tell, nothing really went according to the plan.
+
+I even created an anonymous Gmail account, just to send you a Google Form link.
+And then made an Instagram account with that same Gmail — just to make sure I’d never get caught.
+
+Maybe I wasn’t shy… I was just scared.
+Scared of the “what if/ what if......” — and trust me, there were a lot of what if's.
+
+4- Final Note 
+Pata hai, when we were talking on Instagram, yes there were arguements, and kyu na ho
+We are two different people, with a different approach for thing,
+we have a different mindset, we have a different personalities,
+But what I liked is how I changed for you, how you gave the efforts,
+How you used to give quick replies, how you were adapting....
+Maybe. Maybe that is the end of us- 
+Maybe that is the end of something that never started, or tried to start but..... 
+I liked the time that I spent with you
+That time is the best time I have lived, maybe you won't believe it, but thats Okay. 
+Maybe I am writing it for myslef and you would never open it, but, thats okay.
+
+Franky speaking, I miss you, I really do, 
+It has been a week, and you did not reply to any tell- I also have sent you 2 tells- 
+Ist was Hy- to which you replied Bye and you are friend Falak reacted
+Another was about SKICC, 
+
+It has been more than a week and you did not upload any status, I hope you are doing Well
+I hope everything is Okay
+
+Just a final statement "If my presence on you social media is bothering you please remove me and I will never ask why, because you used to reply to the tells atlesast
+mine are just 2, there have been more than 20 unreplied tells."
+Maybe I am overthing, or maybe not, 
+Well, I can't wait to see you in college. 
+And BTW... You have months (1 year) to think. {My last IG message}. and even if it is a final Goodbye- don’t hesitate. 
+
+
+
+
+
+
                     </div>
-                    <div class="about-card">
-                        <div class="about-image"></div>
-                        <div class="about-text">
-                            <h3 style="color: #6a98f0; margin-bottom: 15px;">Please Reply to</h3>
-                            <p>https://docs.google.com/forms/d/e/1FAIpQLSd02zmCbLs6qeumKm0rRpYXMnm4Ce7HrJ2dc-3iRDX_hS-QSA/viewform?usp=sharing&ouid=111231840513657416190</p>
-                        </div>
-                    </div>
-                    <div class="about-card">
-                        <div class="about-image"></div>
-                        <div class="about-text">
-                            <h3 style="color: #6a98f0; margin-bottom: 15px;">A Confession</h3>
-                            <p>Honestly, I don't like reading novels, books, yes I do read some political/ non fictional/ CS books, but I never read novels (maybe I read some in my school) I am doing all this because doing for you makes me happy. I am not doing it for you but for me, it makes me happy. And I don't watch movies.</p>
-                        </div>
-                    </div>
-                    <div class="about-card">
-                        <div class="about-image"></div>
-                        <div class="about-text">
-                            <h3 style="color: #6a98f0; margin-bottom: 15px;">When I Saw Your Face</h3>
-                            <p>The first time I actually saw your face wasn't in class—it was during exam season. I didn't even ask someone; I just typed your roll number when the forms came out & I saw that cute looking picture of yours.</p>
-                        </div>
-                    </div>
-                    <div class="about-card">
-                        <div class="about-image"></div>
-                        <div class="about-text">
-                            <h3 style="color: #6a98f0; margin-bottom: 15px;">My Views</h3>
-                            <p>Whether your hair's open or tied up, you look pretty. You wear black like it was made for you. And when you're in traditionals… that's a whole different kind of pretty.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="about-quote">
-                    Made a small book like website<br>
-                    Because a book can be opened quietly.<br>
-                    It doesn't ask for attention.<br>
-                    I know we can never meet.<br> 
-                    Maybe you'll never even know who I am.<br> 
-                    But that doesn't stop me from doing everything for you...
-                    Trust me I am a very social person, an extrovert but......
-                </div>
-                <div class="about-quote">
-                    I don't know why I would never confess<br>
-                    Even though I am an extrovert<br>
-                    Even though I can but......<br>
-                    Maybe because I have only seen you from a distance,<br> 
-                    the kind where you don't react out.....<br> 
-                    you just watch, quitely, hoping the moment never ends
-                    
                 </div>
             </div>
         </section>
